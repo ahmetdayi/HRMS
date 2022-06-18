@@ -1,7 +1,6 @@
 package hrms.hrms.business.concretes;
 
 import hrms.hrms.business.abstracts.JobPositionService;
-import hrms.hrms.core.utilities.config.ModelMapperConfig;
 import hrms.hrms.core.utilities.results.*;
 import hrms.hrms.dataAccess.abstratcs.JobPositionDao;
 import hrms.hrms.entities.concretes.JobPosition;

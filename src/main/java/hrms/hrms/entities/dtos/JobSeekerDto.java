@@ -14,11 +14,14 @@ public class JobSeekerDto {
     private String firstName;
 
 
-    private String LastName;
+    private String lastName;
 
 
     private Long nationalityId;
 
+    private String email;
+
+    private String password;
 
     private Date birthDate;
 }

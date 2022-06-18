@@ -25,7 +25,7 @@ public class JobSeeker extends BaseEntity {
     private String firstName;
 
     @Column(name = "lastName",nullable = false)
-    private String LastName;
+    private String lastName;
 
     @Column(name = "nationalityId",nullable = false,unique = true,length = 11)
     private Long nationalityId;

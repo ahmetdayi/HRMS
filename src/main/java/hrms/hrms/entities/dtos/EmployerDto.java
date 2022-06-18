@@ -10,7 +10,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class EmployerDto {
 
+    private String employerName;
+
     private String webSite;
+
+    private String email;
+
+    private String password;
 
     private String telephoneNumber;
 }

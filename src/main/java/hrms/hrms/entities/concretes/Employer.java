@@ -19,6 +19,9 @@ public class Employer extends BaseEntity {
     @Column(name = "employerId",nullable = false)
     private int employerId;
 
+    @Column(name = "employerName",nullable = false,unique = true)
+    private String employerName;
+
     @Column(name = "webSite",nullable = false,unique = true)
     private String webSite;
 
