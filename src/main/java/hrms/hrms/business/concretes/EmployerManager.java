@@ -51,6 +51,10 @@ public class EmployerManager implements EmployerService {
             return new ErrorResult(" Employer already exist ");
         }
 
+        if(!(employerDto.getEmail().split("@")[1].equalsIgnoreCase(employerDto.getWebSite()))){
+            return new ErrorResult("Employer website domain and email domain don't equal");
+        }
+
         modelMapper.map(this.employerDao.save(employer), EmployerDto.class);
         return new SuccessResult("Employer added");
     }
