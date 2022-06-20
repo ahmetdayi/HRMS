@@ -13,5 +13,5 @@ public interface EmployerDao extends JpaRepository<Employer,Integer> {
     Employer getByEmployerName(String employerName);
     Employer getByWebSite(String website);
     Employer getByTelephoneNumber(String telephoneNumber);
-
+    Employer getByEmail(String email);
 }

@@ -7,9 +7,11 @@ import hrms.hrms.core.utilities.results.*;
 import hrms.hrms.dataAccess.abstratcs.JobSeekerDao;
 
 
+import hrms.hrms.entities.concretes.Employer;
 import hrms.hrms.entities.concretes.JobSeeker;
 
 
+import hrms.hrms.entities.dtos.EmployerDto;
 import hrms.hrms.entities.dtos.JobSeekerDto;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,8 +64,25 @@ public class JobSeekerManager implements JobSeekerService {
     }
 
     @Override
-    public Result update(JobSeekerDto jobSeekerDto) {
-        return null;
+    public Result update(int jobSeekerId, JobSeekerDto jobSeekerDto) {
+
+        JobSeeker jobSeeker = this.jobSeekerDao.getByJobSeekerId(jobSeekerId);
+
+        if(jobSeeker != null){
+            jobSeeker.setEmail(jobSeekerDto.getEmail());
+            jobSeeker.setPassword(jobSeekerDto.getPassword());
+            jobSeeker.setBirthDate(jobSeekerDto.getBirthDate());
+            jobSeeker.setFirstName(jobSeekerDto.getFirstName());
+            jobSeeker.setLastName(jobSeekerDto.getLastName());
+
+            if(this.jobSeekerDao.getByEmail(jobSeekerDto.getEmail()) != null){
+                return new ErrorResult(" JobSeeker e mail already used ");
+            }
+            modelMapper.map(jobSeekerDao.save(jobSeeker), JobSeekerDto.class);
+            return new SuccessResult("Job Seeker Updated");
+
+        }
+        return new ErrorResult("Job Seeker Id doesn't exist");
     }
 
     @Override

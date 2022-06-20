@@ -44,6 +44,13 @@ public class JobPositionController {
         return ResponseEntity.badRequest().body(res);
     }
 
+    @PostMapping("/update")
+    public ResponseEntity<?> update(@RequestParam int jobPositionId, @Valid @RequestBody JobPositionDto jobPositionDto) {
+        Result res = this.jobPositionService.update(jobPositionId,jobPositionDto);
+        if (res.isSuccess()) return ResponseEntity.status(HttpStatus.CREATED).body(res);
+        return ResponseEntity.badRequest().body(res);
+    }
+
     @DeleteMapping("/delete")
     public ResponseEntity<Result> delete(@RequestParam int jobPositionId) {
         Result status = jobPositionService.delete(jobPositionId);

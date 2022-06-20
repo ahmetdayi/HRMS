@@ -3,7 +3,9 @@ package hrms.hrms.business.concretes;
 import hrms.hrms.business.abstracts.JobPositionService;
 import hrms.hrms.core.utilities.results.*;
 import hrms.hrms.dataAccess.abstratcs.JobPositionDao;
+import hrms.hrms.entities.concretes.Employer;
 import hrms.hrms.entities.concretes.JobPosition;
+import hrms.hrms.entities.dtos.EmployerDto;
 import hrms.hrms.entities.dtos.JobPositionDto;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,18 +48,33 @@ public class JobPositionManager implements JobPositionService {
     public Result add(JobPositionDto jobPositionDto) {
         JobPosition jobPosition = modelMapper.map(jobPositionDto, JobPosition.class);
         if(this.jobPositionDao.getByJobPositionName(jobPosition.getJobPositionName()) !=null){
-            return new ErrorResult(" jobPosition already exist ");
+            return new ErrorResult(" Job Position already exist ");
         }
 
 
         modelMapper.map(this.jobPositionDao.save(jobPosition), JobPositionDto.class);
-        return new SuccessResult("JobPosition added");
+        return new SuccessResult("Job Position added");
 
     }
 
     @Override
-    public Result update(JobPositionDto jobPositionDto) {
-        return null;
+    public Result update(int jobPositionId ,JobPositionDto jobPositionDto) {
+
+        JobPosition jobPosition = this.jobPositionDao.getByJobPositionId(jobPositionId);
+
+        if(jobPosition != null){
+            jobPosition.setJobPositionName(jobPositionDto.getJobPositionName());
+
+            if(this.jobPositionDao.getByJobPositionName(jobPositionDto.getJobPositionName()) != null){
+                return new ErrorResult(" Job Position name already used ");
+            }
+            modelMapper.map(jobPositionDao.save(jobPosition), JobPositionDto.class);
+            return new SuccessResult("Job Position Updated");
+
+        }
+        return new ErrorResult("Job Position Id doesn't exist");
+
+
     }
 
     @Override

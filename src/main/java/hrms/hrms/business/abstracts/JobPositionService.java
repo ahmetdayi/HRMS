@@ -11,6 +11,6 @@ public interface JobPositionService {
     DataResult<List<JobPositionDto>> getAll();
     DataResult<JobPositionDto> getByJobPositionId(int jobPositionId);
     Result add(JobPositionDto jobPositionDto);
-    Result update(JobPositionDto jobPositionDto);
+    Result update(int jobPositionId, JobPositionDto jobPositionDto);
     Result delete(int jobPositionId);
 }

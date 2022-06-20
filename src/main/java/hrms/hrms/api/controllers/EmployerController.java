@@ -4,6 +4,7 @@ import hrms.hrms.business.abstracts.EmployerService;
 import hrms.hrms.core.utilities.results.DataResult;
 import hrms.hrms.core.utilities.results.Result;
 import hrms.hrms.entities.dtos.EmployerDto;
+import hrms.hrms.entities.dtos.JobPositionDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,6 +39,12 @@ public class EmployerController {
     @PostMapping("/add")
     public ResponseEntity<?> add(@Valid @RequestBody EmployerDto employerDto) {
         Result res = this.employerService.add(employerDto);
+        if (res.isSuccess()) return ResponseEntity.status(HttpStatus.CREATED).body(res);
+        return ResponseEntity.badRequest().body(res);
+    }
+    @PostMapping("/update")
+    public ResponseEntity<?> update(@RequestParam int employerId, @Valid @RequestBody EmployerDto employerDto) {
+        Result res = this.employerService.update(employerId,employerDto);
         if (res.isSuccess()) return ResponseEntity.status(HttpStatus.CREATED).body(res);
         return ResponseEntity.badRequest().body(res);
     }

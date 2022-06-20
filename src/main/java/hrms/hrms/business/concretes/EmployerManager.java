@@ -60,8 +60,42 @@ public class EmployerManager implements EmployerService {
     }
 
     @Override
-    public Result update(EmployerDto employerDto) {
-        return null;
+    public Result update(int employerId, EmployerDto employerDto) {
+        Employer employer = this.employerDao.getByEmployerId(employerId);
+
+        if(employer != null){
+            employer.setEmployerName(employerDto.getEmployerName());
+            employer.setTelephoneNumber(employerDto.getTelephoneNumber());
+            employer.setWebSite(employerDto.getWebSite());
+            employer.setEmail(employerDto.getEmail());
+            employer.setPassword(employerDto.getPassword());
+            if(this.employerDao.getByEmployerName(employerDto.getEmployerName()) != null){
+                return new ErrorResult(" Employer name already used ");
+            }
+            else if(this.employerDao.getByWebSite(employerDto.getWebSite()) != null){
+                return new ErrorResult(" Employer webSite already used ");
+            }
+            else if(this.employerDao.getByTelephoneNumber(employerDto.getTelephoneNumber()) != null){
+                return new ErrorResult(" Employer telephone number already used ");
+            }
+            else if(this.employerDao.getByEmail(employerDto.getEmail()) != null){
+
+                return new ErrorResult(" Employer email already used ");
+            }
+            else{
+                if(!(employerDto.getEmail().split("@")[1].equalsIgnoreCase(employerDto.getWebSite()))){
+                    return new ErrorResult("Employer website domain and email domain don't equal");
+                }
+                modelMapper.map(employerDao.save(employer), EmployerDto.class);
+                return new SuccessResult("Employer Updated");
+            }
+
+
+
+        }
+        return new ErrorResult("Employer Id doesn't exist");
+
+
     }
 
     @Override

@@ -3,6 +3,7 @@ package hrms.hrms.api.controllers;
 import hrms.hrms.business.abstracts.JobSeekerService;
 import hrms.hrms.core.utilities.results.DataResult;
 import hrms.hrms.core.utilities.results.Result;
+import hrms.hrms.entities.dtos.EmployerDto;
 import hrms.hrms.entities.dtos.JobSeekerDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -41,6 +42,14 @@ public class JobSeekerController {
         if (res.isSuccess()) return ResponseEntity.status(HttpStatus.CREATED).body(res);
         return ResponseEntity.badRequest().body(res);
     }
+
+    @PostMapping("/update")
+    public ResponseEntity<?> update(@RequestParam int jobSeekerId, @Valid @RequestBody JobSeekerDto jobSeekerDto) {
+        Result res = this.jobSeekerService.update(jobSeekerId,jobSeekerDto);
+        if (res.isSuccess()) return ResponseEntity.status(HttpStatus.CREATED).body(res);
+        return ResponseEntity.badRequest().body(res);
+    }
+
 
     @DeleteMapping("/delete")
     public ResponseEntity<Result> delete(@RequestParam int jobSeekerId) {
