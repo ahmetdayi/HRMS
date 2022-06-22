@@ -15,6 +15,7 @@ import hrms.hrms.entities.dtos.EmployerDto;
 import hrms.hrms.entities.dtos.JobSeekerDto;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -49,7 +50,7 @@ public class JobSeekerManager implements JobSeekerService {
         }
         return new ErrorDataResult<JobSeekerDto>("jobSeeker Id doesn't exist");
     }
-
+    @Modifying
     @Override
     public Result add(JobSeekerDto jobSeekerDto) {
         JobSeeker jobSeeker = modelMapper.map(jobSeekerDto, JobSeeker.class);
@@ -62,7 +63,7 @@ public class JobSeekerManager implements JobSeekerService {
         return new SuccessResult("JobSeeker added");
 
     }
-
+    @Modifying
     @Override
     public Result update(int jobSeekerId, JobSeekerDto jobSeekerDto) {
 
@@ -84,7 +85,7 @@ public class JobSeekerManager implements JobSeekerService {
         }
         return new ErrorResult("Job Seeker Id doesn't exist");
     }
-
+    @Modifying
     @Override
     public Result delete(int jobSeekerId) {
         if(jobSeekerDao.getByJobSeekerId(jobSeekerId)!=null){

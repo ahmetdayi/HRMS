@@ -1,11 +1,13 @@
 package hrms.hrms.entities.concretes;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import hrms.hrms.core.entities.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -27,4 +29,10 @@ public class Employer extends BaseEntity {
 
     @Column(name = "telephoneNumber",nullable = false,length = 11,unique = true)
     private String telephoneNumber;
+
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL,mappedBy ="employer")
+    private List<JobAdvertisement> jobAdvertisements;
+
+
 }

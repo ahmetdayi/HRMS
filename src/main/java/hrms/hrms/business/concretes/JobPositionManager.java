@@ -9,6 +9,7 @@ import hrms.hrms.entities.dtos.EmployerDto;
 import hrms.hrms.entities.dtos.JobPositionDto;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -43,7 +44,7 @@ public class JobPositionManager implements JobPositionService {
         }
         return new ErrorDataResult<JobPositionDto>("jobPosition Id doesn't exist");
     }
-
+    @Modifying
     @Override
     public Result add(JobPositionDto jobPositionDto) {
         JobPosition jobPosition = modelMapper.map(jobPositionDto, JobPosition.class);
@@ -56,7 +57,7 @@ public class JobPositionManager implements JobPositionService {
         return new SuccessResult("Job Position added");
 
     }
-
+    @Modifying
     @Override
     public Result update(int jobPositionId ,JobPositionDto jobPositionDto) {
 
@@ -76,7 +77,7 @@ public class JobPositionManager implements JobPositionService {
 
 
     }
-
+    @Modifying
     @Override
     public Result delete(int jobPositionId) {
         if(jobPositionDao.getByJobPositionId(jobPositionId)!=null){

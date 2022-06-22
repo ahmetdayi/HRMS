@@ -4,11 +4,12 @@ import hrms.hrms.business.abstracts.EmployerService;
 import hrms.hrms.core.utilities.results.*;
 import hrms.hrms.dataAccess.abstratcs.EmployerDao;
 import hrms.hrms.entities.concretes.Employer;
-import hrms.hrms.entities.concretes.JobSeeker;
+
 import hrms.hrms.entities.dtos.EmployerDto;
-import hrms.hrms.entities.dtos.JobSeekerDto;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -41,7 +42,7 @@ public class EmployerManager implements EmployerService {
         }
         return new ErrorDataResult<EmployerDto>("employer Id doesn't exist");
     }
-
+    @Modifying
     @Override
     public Result add(EmployerDto employerDto) {
         Employer employer = modelMapper.map(employerDto, Employer.class);
@@ -58,7 +59,7 @@ public class EmployerManager implements EmployerService {
         modelMapper.map(this.employerDao.save(employer), EmployerDto.class);
         return new SuccessResult("Employer added");
     }
-
+    @Modifying
     @Override
     public Result update(int employerId, EmployerDto employerDto) {
         Employer employer = this.employerDao.getByEmployerId(employerId);
@@ -97,7 +98,7 @@ public class EmployerManager implements EmployerService {
 
 
     }
-
+    @Modifying
     @Override
     public Result delete(int employerId) {
         if(employerDao.getByEmployerId(employerId)!=null){
