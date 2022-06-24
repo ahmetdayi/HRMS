@@ -14,4 +14,6 @@ public interface JobAdvertisementService {
     Result add(JobAdvertisementDto jobAdvertisementDto);
     Result addJobAdvertisementInEmployer(int employerId,int jobId );
     Result delete(int jobId);
+
+
 }

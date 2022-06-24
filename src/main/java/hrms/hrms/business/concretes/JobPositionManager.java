@@ -2,7 +2,7 @@ package hrms.hrms.business.concretes;
 
 import hrms.hrms.business.abstracts.JobPositionService;
 import hrms.hrms.core.utilities.results.*;
-import hrms.hrms.dataAccess.abstratcs.JobPositionDao;
+import hrms.hrms.dataAccess.abstracts.JobPositionDao;
 import hrms.hrms.entities.concretes.Employer;
 import hrms.hrms.entities.concretes.JobPosition;
 import hrms.hrms.entities.dtos.EmployerDto;
@@ -81,7 +81,7 @@ public class JobPositionManager implements JobPositionService {
     @Override
     public Result delete(int jobPositionId) {
         if(jobPositionDao.getByJobPositionId(jobPositionId)!=null){
-            jobPositionDao.deleteById(jobPositionId);
+            jobPositionDao.deleteByJobPositionId(jobPositionId);
             return new SuccessResult("jobPosition deleted");
         }
         return new ErrorResult("jobPosition Id doesn't exist");

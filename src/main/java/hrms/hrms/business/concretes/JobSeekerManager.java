@@ -4,7 +4,7 @@ import hrms.hrms.business.abstracts.JobSeekerService;
 
 import hrms.hrms.core.utilities.results.*;
 
-import hrms.hrms.dataAccess.abstratcs.JobSeekerDao;
+import hrms.hrms.dataAccess.abstracts.JobSeekerDao;
 
 
 import hrms.hrms.entities.concretes.Employer;

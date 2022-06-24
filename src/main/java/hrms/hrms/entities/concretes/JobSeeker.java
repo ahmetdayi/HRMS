@@ -1,5 +1,6 @@
 package hrms.hrms.entities.concretes;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import hrms.hrms.core.entities.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -33,4 +35,8 @@ public class JobSeeker extends BaseEntity {
     @Column(name = "birthDate",nullable = false)
     @Temporal(TemporalType.DATE)
     private Date birthDate;
+
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "jobSeeker")
+    private List<Cv> cvs;
 }

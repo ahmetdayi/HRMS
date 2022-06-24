@@ -31,5 +31,6 @@ public class JobAdvertisementDto {
 
     private Date deadlineDate;
 
+    private Date releaseDate;
 
 }

@@ -3,8 +3,8 @@ package hrms.hrms.business.concretes;
 import hrms.hrms.business.abstracts.JobAdvertisementService;
 import hrms.hrms.core.utilities.results.*;
 
-import hrms.hrms.dataAccess.abstratcs.EmployerDao;
-import hrms.hrms.dataAccess.abstratcs.JobAdvertisementDao;
+import hrms.hrms.dataAccess.abstracts.EmployerDao;
+import hrms.hrms.dataAccess.abstracts.JobAdvertisementDao;
 
 import hrms.hrms.entities.concretes.Employer;
 import hrms.hrms.entities.concretes.JobAdvertisement;

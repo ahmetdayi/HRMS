@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -39,6 +40,11 @@ public class JobAdvertisement {
     @Column(name = "deadlineDate",nullable = false)
     @Temporal(TemporalType.DATE)
     private Date deadlineDate;
+
+    @Column(name = "releaseDate",nullable = false)
+    @Temporal(TemporalType.DATE)
+    @CreatedDate
+    private Date releaseDate;
 
 
     @ManyToOne()

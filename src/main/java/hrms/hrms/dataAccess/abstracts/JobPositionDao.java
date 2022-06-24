@@ -1,4 +1,4 @@
-package hrms.hrms.dataAccess.abstratcs;
+package hrms.hrms.dataAccess.abstracts;
 
 import hrms.hrms.entities.concretes.JobPosition;
 import org.springframework.data.jpa.repository.JpaRepository;

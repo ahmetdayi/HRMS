@@ -28,5 +28,7 @@ public class JobAdvertisementWithEmployerDto {
 
     private Date deadlineDate;
 
+    private Date releaseDate;
+
     private String employerName;
 }
