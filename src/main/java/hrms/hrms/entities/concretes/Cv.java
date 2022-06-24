@@ -48,6 +48,7 @@ public class Cv {
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "cv")
     private List<ProgrammingLanguageAndTechnology> programmingLanguageAndTechnologies;
 
+
     @ManyToOne()
     @JoinColumn(name = "jobSeekerId")
     private JobSeeker jobSeeker;

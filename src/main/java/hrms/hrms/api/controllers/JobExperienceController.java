@@ -3,6 +3,7 @@ package hrms.hrms.api.controllers;
 import hrms.hrms.business.abstracts.JobExperienceService;
 import hrms.hrms.core.utilities.results.DataResult;
 import hrms.hrms.core.utilities.results.Result;
+import hrms.hrms.entities.dtos.EducationDto;
 import hrms.hrms.entities.dtos.JobExperienceDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -55,5 +56,10 @@ public class JobExperienceController {
         Result res = this.jobExperienceService.addJobExperienceToCv(cvId,jobExperienceId);
         if (res.isSuccess()) return ResponseEntity.status(HttpStatus.CREATED).body(res);
         return ResponseEntity.badRequest().body(res);
+    }
+
+    @GetMapping("/getAllDesc")
+    public ResponseEntity<DataResult<List<JobExperienceDto>>>getAllSorted() {
+        return ResponseEntity.ok(this.jobExperienceService.getAllSorted());
     }
 }

@@ -11,8 +11,10 @@ import hrms.hrms.entities.concretes.JobSeeker;
 import hrms.hrms.entities.dtos.EducationDto;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -71,4 +73,14 @@ public class EducationManager implements EducationService {
         cvDao.save(cv);
         return new SuccessResult("Cv added by Education.");
     }
+
+    @Override
+    public DataResult<List<EducationDto>> getAllSorted() {
+        Sort sort = Sort.by(Sort.Direction.DESC,"graduateDate");
+        List<Education> educations = this.educationDao.findAll(sort);
+        List<EducationDto> dtos= educations.stream().map(education -> modelMapper.map(education,EducationDto.class)).collect(Collectors.toList());
+        return new SuccessDataResult<List<EducationDto>>
+                (dtos,"Başarılı");
+    }
+
 }

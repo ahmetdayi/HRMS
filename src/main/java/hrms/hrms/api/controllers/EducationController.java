@@ -55,4 +55,8 @@ public class EducationController {
         if (res.isSuccess()) return ResponseEntity.status(HttpStatus.CREATED).body(res);
         return ResponseEntity.badRequest().body(res);
     }
+    @GetMapping("/getAllDesc")
+    public ResponseEntity<DataResult<List<EducationDto>>>getAllSorted() {
+        return ResponseEntity.ok(this.educationService.getAllSorted());
+    }
 }
