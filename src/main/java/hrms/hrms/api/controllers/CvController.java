@@ -4,6 +4,7 @@ package hrms.hrms.api.controllers;
 import hrms.hrms.business.abstracts.CvService;
 import hrms.hrms.core.utilities.results.DataResult;
 import hrms.hrms.core.utilities.results.Result;
+import hrms.hrms.entities.dtos.CvAddDto;
 import hrms.hrms.entities.dtos.CvDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,7 +38,7 @@ public class CvController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> add(@Valid @RequestBody CvDto cvDto) {
+    public ResponseEntity<?> add(@Valid @RequestBody CvAddDto cvDto) {
         Result res = this.cvService.add(cvDto);
         if (res.isSuccess()) return ResponseEntity.status(HttpStatus.CREATED).body(res);
         return ResponseEntity.badRequest().body(res);

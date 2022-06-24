@@ -8,6 +8,7 @@ import hrms.hrms.entities.concretes.Cv;
 import hrms.hrms.entities.concretes.Employer;
 import hrms.hrms.entities.concretes.JobAdvertisement;
 import hrms.hrms.entities.concretes.JobSeeker;
+import hrms.hrms.entities.dtos.CvAddDto;
 import hrms.hrms.entities.dtos.CvDto;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +48,7 @@ public class CvManager implements CvService {
     }
 
     @Override
-    public Result add(CvDto cvDto) {
+    public Result add(CvAddDto cvDto) {
         Cv cv = modelMapper.map(cvDto, Cv.class);
 
         modelMapper.map(this.cvDao.save(cv), CvDto.class);
