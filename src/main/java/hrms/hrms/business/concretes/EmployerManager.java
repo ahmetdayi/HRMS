@@ -36,8 +36,8 @@ public class EmployerManager implements EmployerService {
     @Override
     public DataResult<EmployerDto> getByEmployerId(int employerId) {
 
-        if(employerDao.getByEmployerId(employerId)!=null){
-            Employer employer = this.employerDao.getByEmployerId(employerId);
+        if(employerDao.getById(employerId)!=null){
+            Employer employer = this.employerDao.getById(employerId);
             return new SuccessDataResult<EmployerDto>((modelMapper.map(employer,EmployerDto.class)),"data listed");
         }
         return new ErrorDataResult<EmployerDto>("employer Id doesn't exist");
@@ -62,7 +62,7 @@ public class EmployerManager implements EmployerService {
     @Modifying
     @Override
     public Result update(int employerId, EmployerDto employerDto) {
-        Employer employer = this.employerDao.getByEmployerId(employerId);
+        Employer employer = this.employerDao.getById(employerId);
 
         if(employer != null){
             employer.setEmployerName(employerDto.getEmployerName());
@@ -101,7 +101,7 @@ public class EmployerManager implements EmployerService {
     @Modifying
     @Override
     public Result delete(int employerId) {
-        if(employerDao.getByEmployerId(employerId)!=null){
+        if(employerDao.getById(employerId)!=null){
             employerDao.deleteById(employerId);
             return new SuccessResult("employer deleted");
         }

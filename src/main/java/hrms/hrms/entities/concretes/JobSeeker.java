@@ -1,7 +1,7 @@
 package hrms.hrms.entities.concretes;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import hrms.hrms.core.entities.BaseEntity;
+import hrms.hrms.core.entities.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,12 +16,8 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "jobSeekers")
-public class JobSeeker extends BaseEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "jobSeekerId")
-    private int jobSeekerId;
+@PrimaryKeyJoinColumn(name = "jobSeekerId",referencedColumnName = "id")
+public class JobSeeker extends User {
 
     @Column(name = "firstName",nullable = false)
     private String firstName;
