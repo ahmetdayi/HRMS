@@ -12,7 +12,7 @@ public interface CvService {
 
     DataResult<List<CvDto>> getAll();
     DataResult<CvDto> getByCvId(int cvId);
-    Result add(CvAddDto cvDto);
+    Result add(CvAddDto cvAddDto);
     Result delete(int cvId);
 
     Result addCvInJobSeeker(int cvId,int jobSeekerId );

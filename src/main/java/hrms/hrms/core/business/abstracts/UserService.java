@@ -3,8 +3,6 @@ package hrms.hrms.core.business.abstracts;
 import hrms.hrms.core.entities.User;
 import hrms.hrms.core.utilities.results.DataResult;
 import hrms.hrms.core.utilities.results.Result;
-import hrms.hrms.entities.dtos.CvAddDto;
-import hrms.hrms.entities.dtos.CvDto;
 
 import java.util.List;
 

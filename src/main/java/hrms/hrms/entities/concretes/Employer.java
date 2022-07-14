@@ -1,6 +1,7 @@
 package hrms.hrms.entities.concretes;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import hrms.hrms.core.entities.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,22 +15,19 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "employers")
-@PrimaryKeyJoinColumn(name = "employerId",referencedColumnName = "id")
+@PrimaryKeyJoinColumn(name = "employerId",referencedColumnName = "userId")
 public class Employer extends User {
 
-
-    @Column(name = "employerName",nullable = false,unique = true)
+    @Column(name = "employerName",unique = true)
     private String employerName;
 
-    @Column(name = "webSite",nullable = false,unique = true)
+    @Column(name = "webSite",unique = true)
     private String webSite;
 
-    @Column(name = "telephoneNumber",nullable = false,length = 11,unique = true)
+    @Column(name = "telephoneNumber",unique = true)
     private String telephoneNumber;
 
     @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL,mappedBy ="employer")
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "employer")
     private List<JobAdvertisement> jobAdvertisements;
-
-
 }

@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 
 @Data
@@ -14,6 +16,8 @@ import javax.validation.constraints.Min;
 @NoArgsConstructor
 public class ForeignLanguageDto {
 
+    @NotNull
+    @NotBlank
     private String foreignLanguageName;
 
     @Max(5)

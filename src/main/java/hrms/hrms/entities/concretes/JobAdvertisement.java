@@ -1,14 +1,13 @@
 package hrms.hrms.entities.concretes;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
-
 
 @Data
 @AllArgsConstructor
@@ -22,30 +21,34 @@ public class JobAdvertisement {
     @Column(name = "jobId")
     private int jobId;
 
-    @Column(name = "jobName",nullable = false)
+    @Column(name = "jobName")
     private String jobName;
 
-    @Column(name = "jobDescription",nullable = false)
+
+    @Column(name = "jobDescription")
     private String jobDescription;
 
-    @Column(name = "jobCity",nullable = false)
+
+    @Column(name = "jobCity")
     private String jobCity;
+
 
     @Column(name = "jobSalary")
     private String jobSalary;
 
-    @Column(name = "jobOpenPosition",nullable = false)
+
+    @Column(name = "jobOpenPosition")
     private String jobOpenPosition;
 
-    @Column(name = "deadlineDate",nullable = false)
-    @Temporal(TemporalType.DATE)
-    private Date deadlineDate;
 
-    @Column(name = "releaseDate",nullable = false)
+    @Column(name = "releaseDate")
     @Temporal(TemporalType.DATE)
-    @CreatedDate
     private Date releaseDate;
 
+
+    @Column(name = "deadlineDate")
+    @Temporal(TemporalType.DATE)
+    private Date deadlineDate;
 
     @ManyToOne()
     @JoinColumn(name = "employerId")

@@ -7,14 +7,12 @@ import hrms.hrms.dataAccess.abstracts.CvDao;
 import hrms.hrms.dataAccess.abstracts.EducationDao;
 import hrms.hrms.entities.concretes.Cv;
 import hrms.hrms.entities.concretes.Education;
-import hrms.hrms.entities.concretes.JobSeeker;
 import hrms.hrms.entities.dtos.EducationDto;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -59,12 +57,11 @@ public class EducationManager implements EducationService {
     @Override
     public Result delete(int educationId) {
         if(educationDao.getByEducationId(educationId)!=null){
-            educationDao.deleteByEducationId(educationId);
+            educationDao.deleteById(educationId);
             return new SuccessResult("Education deleted");
         }
         return new ErrorResult("Education Id doesn't exist");
     }
-
     @Override
     public Result addEducationToCv(int cvId, int educationId) {
         Cv cv = cvDao.getByCvId(cvId);
@@ -82,5 +79,4 @@ public class EducationManager implements EducationService {
         return new SuccessDataResult<List<EducationDto>>
                 (dtos,"Başarılı");
     }
-
 }

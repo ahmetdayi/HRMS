@@ -1,11 +1,10 @@
 package hrms.hrms.entities.dtos;
 
-import hrms.hrms.entities.concretes.Employer;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.util.Date;
 
+import java.util.Date;
 
 @Data
 @AllArgsConstructor

@@ -32,7 +32,7 @@ public class Cv {
     @Column(name = "description")
     private String description;
 
-    @JsonIgnore
+
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "cv")
     private List<Education> educations;
 
@@ -46,8 +46,7 @@ public class Cv {
 
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "cv")
-    private List<ProgrammingLanguageAndTechnology> programmingLanguageAndTechnologies;
-
+    private List<Skill> skills;
 
     @ManyToOne()
     @JoinColumn(name = "jobSeekerId")
@@ -56,6 +55,4 @@ public class Cv {
     public void addJobSeeker(JobSeeker jobSeeker){
         this.jobSeeker=jobSeeker;
     }
-
-
 }

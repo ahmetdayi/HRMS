@@ -5,7 +5,6 @@ import hrms.hrms.core.utilities.results.*;
 import hrms.hrms.dataAccess.abstracts.CvDao;
 import hrms.hrms.dataAccess.abstracts.ForeignLanguageDao;
 import hrms.hrms.entities.concretes.Cv;
-import hrms.hrms.entities.concretes.Education;
 import hrms.hrms.entities.concretes.ForeignLanguage;
 import hrms.hrms.entities.dtos.ForeignLanguageDto;
 import org.modelmapper.ModelMapper;
@@ -56,7 +55,7 @@ public class ForeignLanguageManager implements ForeignLanguageService {
     @Override
     public Result delete(int foreignLanguageId) {
         if(foreignLanguageDao.getByForeignLanguageId(foreignLanguageId)!=null){
-            foreignLanguageDao.deleteByForeignLanguageId(foreignLanguageId);
+            foreignLanguageDao.deleteById(foreignLanguageId);
             return new SuccessResult("ForeignLanguage deleted");
         }
         return new ErrorResult("ForeignLanguage Id doesn't exist");

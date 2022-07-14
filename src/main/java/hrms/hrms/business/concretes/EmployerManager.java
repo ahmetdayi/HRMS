@@ -4,12 +4,9 @@ import hrms.hrms.business.abstracts.EmployerService;
 import hrms.hrms.core.utilities.results.*;
 import hrms.hrms.dataAccess.abstracts.EmployerDao;
 import hrms.hrms.entities.concretes.Employer;
-
 import hrms.hrms.entities.dtos.EmployerDto;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,6 +14,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class EmployerManager implements EmployerService {
+
     private EmployerDao employerDao;
     private ModelMapper modelMapper;
 
@@ -28,9 +26,10 @@ public class EmployerManager implements EmployerService {
 
     @Override
     public DataResult<List<EmployerDto>> getAll() {
+
         List<Employer> employers = this.employerDao.findAll();
         List<EmployerDto> dtos= employers.stream().map(employer -> modelMapper.map(employer,EmployerDto.class)).collect(Collectors.toList());
-        return new SuccessDataResult<List<EmployerDto>>(dtos,"data listed");
+        return new SuccessDataResult<List<EmployerDto>>(dtos,"Data Listed");
     }
 
     @Override
@@ -38,11 +37,11 @@ public class EmployerManager implements EmployerService {
 
         if(employerDao.getById(employerId)!=null){
             Employer employer = this.employerDao.getById(employerId);
-            return new SuccessDataResult<EmployerDto>((modelMapper.map(employer,EmployerDto.class)),"data listed");
+            return new SuccessDataResult<EmployerDto>((modelMapper.map(employer,EmployerDto.class)),"Data listed");
         }
-        return new ErrorDataResult<EmployerDto>("employer Id doesn't exist");
+        return new ErrorDataResult<EmployerDto>("Employer Id doesn't exist");
     }
-    @Modifying
+
     @Override
     public Result add(EmployerDto employerDto) {
         Employer employer = modelMapper.map(employerDto, Employer.class);
@@ -59,7 +58,7 @@ public class EmployerManager implements EmployerService {
         modelMapper.map(this.employerDao.save(employer), EmployerDto.class);
         return new SuccessResult("Employer added");
     }
-    @Modifying
+
     @Override
     public Result update(int employerId, EmployerDto employerDto) {
         Employer employer = this.employerDao.getById(employerId);
@@ -95,17 +94,15 @@ public class EmployerManager implements EmployerService {
 
         }
         return new ErrorResult("Employer Id doesn't exist");
-
-
     }
-    @Modifying
+
     @Override
     public Result delete(int employerId) {
         if(employerDao.getById(employerId)!=null){
             employerDao.deleteById(employerId);
-            return new SuccessResult("employer deleted");
+            return new SuccessResult("Employer deleted");
         }
-        return new ErrorResult("employer Id doesn't exist");
+        return new ErrorResult("Employer Id doesn't exist");
 
     }
 }

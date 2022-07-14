@@ -1,11 +1,14 @@
 package hrms.hrms.entities.concretes;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Data
@@ -20,13 +23,13 @@ public class Education {
     @Column(name = "educationId")
     private int educationId;
 
-    @Column(name = "schoolName", nullable = false)
+    @Column(name = "schoolName")
     private String schoolName;
 
-    @Column(name = "department", nullable = false)
+    @Column(name = "department")
     private String department;
 
-    @Column(name = "startDate", nullable = false)
+    @Column(name = "startDate")
     @Temporal(TemporalType.DATE)
     private Date startDate;
 
@@ -34,6 +37,7 @@ public class Education {
     @Temporal(TemporalType.DATE)
     private Date graduateDate;
 
+    @JsonIgnore
     @ManyToOne()
     @JoinColumn(name = "cvId")
     private Cv cv;

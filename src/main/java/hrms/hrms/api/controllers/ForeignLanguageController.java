@@ -29,23 +29,37 @@ public class ForeignLanguageController {
     }
 
     @GetMapping("/getAll")
-    public ResponseEntity<DataResult<List<ForeignLanguageDto>>> getAll() {
+    public ResponseEntity<?> getAll() {
         DataResult<List<ForeignLanguageDto>> foreignLanguages = foreignLanguageService.getAll();
         return ResponseEntity.ok(foreignLanguages);
     }
 
     @GetMapping("/getByForeignLanguageId")
-    public ResponseEntity<DataResult<ForeignLanguageDto>> getByForeignLanguageId(@RequestParam int foreignLanguageId) {
+    public ResponseEntity<?> getByForeignLanguageId(@RequestParam int foreignLanguageId) {
         DataResult<ForeignLanguageDto> foreignLanguage = foreignLanguageService.getByForeignLanguageId(foreignLanguageId);
         return ResponseEntity.ok(foreignLanguage);
     }
 
     @PostMapping("/add")
     public ResponseEntity<?> add(@Valid @RequestBody ForeignLanguageDto foreignLanguageDto) {
-        return ResponseEntity.ok(this.foreignLanguageService.add(foreignLanguageDto));
-
+         return ResponseEntity.ok(this.foreignLanguageService.add(foreignLanguageDto));
 
     }
+
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<?> delete(@RequestParam int foreignLanguageId) {
+        Result status = foreignLanguageService.delete(foreignLanguageId);
+        return ResponseEntity.ok(status);
+
+    }
+
+    @PutMapping("/{cvId}/foreignLanguages/{foreignLanguageId}")
+    public ResponseEntity<?> addForeignLanguageToCv(@PathVariable int cvId, @PathVariable int foreignLanguageId){
+        return ResponseEntity.ok(this.foreignLanguageService.addForeignLanguageToCv(cvId,foreignLanguageId));
+
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorDataResult<Object> handleValidationException
@@ -58,19 +72,5 @@ public class ForeignLanguageController {
         ErrorDataResult<Object> errors
                 = new ErrorDataResult<Object>(validationErrors,"Doğrulama hataları");
         return errors;
-    }
-
-    @DeleteMapping("/delete")
-    public ResponseEntity<Result> delete(@RequestParam int foreignLanguageId) {
-        Result status = foreignLanguageService.delete(foreignLanguageId);
-        return ResponseEntity.ok(status);
-
-    }
-
-    @PutMapping("/{cvId}/foreignLanguages/{foreignLanguageId}")
-    public ResponseEntity<?> addForeignLanguageToCv(@PathVariable int cvId, @PathVariable int foreignLanguageId){
-        Result res = this.foreignLanguageService.addForeignLanguageToCv(cvId,foreignLanguageId);
-        if (res.isSuccess()) return ResponseEntity.status(HttpStatus.CREATED).body(res);
-        return ResponseEntity.badRequest().body(res);
     }
 }

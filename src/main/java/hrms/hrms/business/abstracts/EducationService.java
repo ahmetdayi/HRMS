@@ -16,5 +16,4 @@ public interface EducationService {
 
     Result addEducationToCv(int cvId,int educationId );
     DataResult<List<EducationDto>> getAllSorted();
-
 }

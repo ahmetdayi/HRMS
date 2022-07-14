@@ -7,16 +7,20 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "jobPositions")
 public class JobPosition {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "jobPositionId")
     private int jobPositionId;
-    @Column(name = "jobPositionName",nullable = false,unique = true)
+
+
+    @Column(name = "jobPositionName",unique = true)
     private String jobPositionName;
 }

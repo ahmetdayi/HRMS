@@ -2,7 +2,6 @@ package hrms.hrms.business.abstracts;
 
 import hrms.hrms.core.utilities.results.DataResult;
 import hrms.hrms.core.utilities.results.Result;
-import hrms.hrms.entities.dtos.EducationDto;
 import hrms.hrms.entities.dtos.ForeignLanguageDto;
 import hrms.hrms.entities.dtos.JobExperienceDto;
 

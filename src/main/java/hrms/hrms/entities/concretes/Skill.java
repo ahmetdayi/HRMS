@@ -7,28 +7,30 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "programmingLanguagesAndTechnologies")
-public class ProgrammingLanguageAndTechnology {
+@Table(name = "skills")
+public class Skill {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int Id;
+    private int skillId;
 
-    @Column(name = "name", nullable = false)
-    private String Name;
+    @Column(name = "name")
+    private String skillName;
 
     @JsonIgnore
     @ManyToOne()
     @JoinColumn(name = "cvId")
     private Cv cv;
 
-    public void addProgrammingLanguageAndTechnologytoCv(Cv cv){
+    public void addSkillToCv(Cv cv){
         this.cv=cv;
     }
 }

@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Data
@@ -23,11 +25,18 @@ public class ForeignLanguage {
     @Column(name = "foreignLanguageId")
     private int foreignLanguageId;
 
-    @Column(name = "foreignLanguageName", nullable = false)
+
+    @Column(name = "foreignLanguageName")
     private String foreignLanguageName;
 
+    @Column(name = "password")
+    private String password;
 
-    @Column(name = "foreignLanguageLevel", nullable = false)
+    @Column(name = "confirmPassword")
+    private String confirmPassword;
+
+
+    @Column(name = "foreignLanguageLevel")
     private int foreignLanguageLevel;
 
     @JsonIgnore

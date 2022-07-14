@@ -1,21 +1,12 @@
 package hrms.hrms.business.concretes;
 
 import hrms.hrms.business.abstracts.JobSeekerService;
-
 import hrms.hrms.core.utilities.results.*;
-
 import hrms.hrms.dataAccess.abstracts.JobSeekerDao;
-
-
-import hrms.hrms.entities.concretes.Employer;
 import hrms.hrms.entities.concretes.JobSeeker;
-
-
-import hrms.hrms.entities.dtos.EmployerDto;
 import hrms.hrms.entities.dtos.JobSeekerDto;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -38,7 +29,7 @@ public class JobSeekerManager implements JobSeekerService {
     public DataResult<List<JobSeekerDto>> getAll() {
         List<JobSeeker> jobSeekers = this.jobSeekerDao.findAll();
         List<JobSeekerDto> dtos= jobSeekers.stream().map(jobSeeker -> modelMapper.map(jobSeeker,JobSeekerDto.class)).collect(Collectors.toList());
-        return new SuccessDataResult<List<JobSeekerDto>>(dtos,"data listed");
+        return new SuccessDataResult<List<JobSeekerDto>>(dtos,"Data listed");
     }
 
     @Override
@@ -46,11 +37,11 @@ public class JobSeekerManager implements JobSeekerService {
 
         if(jobSeekerDao.getById(jobSeekerId)!=null){
             JobSeeker jobSeeker = this.jobSeekerDao.getById(jobSeekerId);
-            return new SuccessDataResult<JobSeekerDto>((modelMapper.map(jobSeeker,JobSeekerDto.class)),"data listed");
+            return new SuccessDataResult<JobSeekerDto>((modelMapper.map(jobSeeker,JobSeekerDto.class)),"Data listed");
         }
-        return new ErrorDataResult<JobSeekerDto>("jobSeeker Id doesn't exist");
+        return new ErrorDataResult<JobSeekerDto>("JobSeeker Id doesn't exist");
     }
-    @Modifying
+
     @Override
     public Result add(JobSeekerDto jobSeekerDto) {
         JobSeeker jobSeeker = modelMapper.map(jobSeekerDto, JobSeeker.class);
@@ -63,10 +54,9 @@ public class JobSeekerManager implements JobSeekerService {
         return new SuccessResult("JobSeeker added");
 
     }
-    @Modifying
+
     @Override
     public Result update(int jobSeekerId, JobSeekerDto jobSeekerDto) {
-
         JobSeeker jobSeeker = this.jobSeekerDao.getById(jobSeekerId);
 
         if(jobSeeker != null){
@@ -85,14 +75,14 @@ public class JobSeekerManager implements JobSeekerService {
         }
         return new ErrorResult("Job Seeker Id doesn't exist");
     }
-    @Modifying
+
     @Override
     public Result delete(int jobSeekerId) {
-        if(jobSeekerDao.getById(jobSeekerId) != null){
+        if(jobSeekerDao.getById(jobSeekerId)!=null){
             jobSeekerDao.deleteById(jobSeekerId);
-            return new SuccessResult("jobSeeker deleted");
+            return new SuccessResult("JobSeeker deleted");
         }
-        return new ErrorResult("jobSeeker Id doesn't exist");
+        return new ErrorResult("JobSeeker Id doesn't exist");
 
     }
 }

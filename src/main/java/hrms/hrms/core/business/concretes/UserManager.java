@@ -2,16 +2,16 @@ package hrms.hrms.core.business.concretes;
 
 import hrms.hrms.core.business.abstracts.UserService;
 import hrms.hrms.core.dataAccess.abstracts.UserDao;
+import hrms.hrms.core.entities.SecurityUser;
 import hrms.hrms.core.entities.User;
 import hrms.hrms.core.utilities.results.*;
-import hrms.hrms.entities.concretes.SecurityUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import java.util.List;
 
+import java.util.List;
 
 @Service
 public class UserManager implements UserService, UserDetailsService {
@@ -23,9 +23,7 @@ public class UserManager implements UserService, UserDetailsService {
         this.userDao = userDao;
 
     }
-
-
-
+    
     @Override
     public DataResult<List<User>> getAll() {
         List<User> user = this.userDao.findAll();

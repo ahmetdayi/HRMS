@@ -2,17 +2,15 @@ package hrms.hrms.business.concretes;
 
 import hrms.hrms.business.abstracts.JobAdvertisementService;
 import hrms.hrms.core.utilities.results.*;
-
 import hrms.hrms.dataAccess.abstracts.EmployerDao;
 import hrms.hrms.dataAccess.abstracts.JobAdvertisementDao;
-
 import hrms.hrms.entities.concretes.Employer;
 import hrms.hrms.entities.concretes.JobAdvertisement;
-
 import hrms.hrms.entities.dtos.JobAdvertisementDto;
 import hrms.hrms.entities.dtos.JobAdvertisementWithEmployerDto;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +19,6 @@ import java.util.stream.Collectors;
 
 @Service
 public class JobAdvertisementManager implements JobAdvertisementService {
-
     private JobAdvertisementDao jobAdvertisementDao;
     private ModelMapper modelMapper;
     private EmployerDao employerDao;
@@ -66,10 +63,10 @@ public class JobAdvertisementManager implements JobAdvertisementService {
     @Override
     public Result addJobAdvertisementInEmployer(int employerId, int jobId){
         JobAdvertisement jobAdvertisement = jobAdvertisementDao.getByJobId(jobId);
-        Employer employers = employerDao.getById(employerId);
+        Employer employers = employerDao.getByEmployerId(employerId);
         jobAdvertisement.addEmployer(employers);
         employerDao.save(employers);
-        return new SuccessResult("job Advertisement added by employer.");
+        return new SuccessResult("Job Advertisement added by employer.");
     }
 
     @Modifying
@@ -81,5 +78,11 @@ public class JobAdvertisementManager implements JobAdvertisementService {
         }
         return new ErrorResult("Job Id doesn't exist");
 
+    }
+    @Override
+    public DataResult<List<JobAdvertisement>> getAllSorted() {
+        Sort sort = Sort.by(Sort.Direction.DESC,"deadlineDate");
+        return new SuccessDataResult<List<JobAdvertisement>>
+                (this.jobAdvertisementDao.findAll(sort),"Başarılı");
     }
 }

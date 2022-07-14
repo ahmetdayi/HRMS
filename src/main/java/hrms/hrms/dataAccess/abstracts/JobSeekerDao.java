@@ -6,9 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface JobSeekerDao extends JpaRepository<JobSeeker,Integer> {
 
 
-
     JobSeeker getByFirstNameAndLastName(String jobSeekerFirstName, String jobSeekerLastName);
-    JobSeeker getByNationalityId(Long nationalityId);
+    JobSeeker getByNationalityId(String nationalityId);
     JobSeeker getByEmail(String email);
 
 

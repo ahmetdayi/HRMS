@@ -1,4 +1,5 @@
 package hrms.hrms.entities.concretes;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import hrms.hrms.core.entities.User;
 import hrms.hrms.entities.enums.Role;
@@ -35,7 +36,7 @@ public class Authority {
     }
     @JsonIgnore
     @OneToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "userId")
     private User user;
 
     public void addUser(User user) {

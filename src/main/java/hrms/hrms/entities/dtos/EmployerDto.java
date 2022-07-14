@@ -1,26 +1,38 @@
 package hrms.hrms.entities.dtos;
 
 
-import hrms.hrms.entities.concretes.JobAdvertisement;
+
+
+import hrms.hrms.core.entities.dtos.UserDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
+
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class EmployerDto {
 
-    private String employerName;
+public class EmployerDto extends UserDto {
 
+    @NotNull
+    @NotBlank
     private String webSite;
 
-    private String email;
+    @NotNull
+    @NotBlank
+    private String employerName;
 
-    private String password;
-
+    @NotNull
+    @NotBlank
+    @Size(min = 11, max = 11)
     private String telephoneNumber;
+
 
 }

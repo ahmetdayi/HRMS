@@ -48,8 +48,8 @@ public class CvManager implements CvService {
     }
 
     @Override
-    public Result add(CvAddDto cvDto) {
-        Cv cv = modelMapper.map(cvDto, Cv.class);
+    public Result add(CvAddDto cvAddDto) {
+        Cv cv = modelMapper.map(cvAddDto, Cv.class);
 
         modelMapper.map(this.cvDao.save(cv), CvDto.class);
         return new SuccessResult("Cv added");
@@ -58,7 +58,7 @@ public class CvManager implements CvService {
     @Override
     public Result delete(int cvId) {
         if(cvDao.getByCvId(cvId)!=null){
-            cvDao.deleteByCvId(cvId);
+            cvDao.deleteById(cvId);
             return new SuccessResult("Cv deleted");
         }
         return new ErrorResult("Cv Id doesn't exist");
@@ -67,7 +67,7 @@ public class CvManager implements CvService {
     @Override
     public Result addCvInJobSeeker(int cvId, int jobSeekerId) {
         Cv cv = cvDao.getByCvId(cvId);
-        JobSeeker jobSeeker = jobSeekerDao.getById(jobSeekerId);
+        JobSeeker jobSeeker = jobSeekerDao.getByJobSeekerId(jobSeekerId);
         cv.addJobSeeker(jobSeeker);
         jobSeekerDao.save(jobSeeker);
         return new SuccessResult("Cv added by Job Seeker.");

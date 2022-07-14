@@ -5,10 +5,7 @@ import hrms.hrms.core.utilities.results.*;
 import hrms.hrms.dataAccess.abstracts.CvDao;
 import hrms.hrms.dataAccess.abstracts.JobExperienceDao;
 import hrms.hrms.entities.concretes.Cv;
-import hrms.hrms.entities.concretes.Education;
-import hrms.hrms.entities.concretes.ForeignLanguage;
 import hrms.hrms.entities.concretes.JobExperience;
-import hrms.hrms.entities.dtos.EducationDto;
 import hrms.hrms.entities.dtos.JobExperienceDto;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,12 +56,11 @@ public class JobExperienceManager implements JobExperienceService {
     @Override
     public Result delete(int jobExperienceId) {
         if(jobExperienceDao.getByJobExperienceId(jobExperienceId)!=null){
-            jobExperienceDao.deleteByJobExperienceId(jobExperienceId);
+            jobExperienceDao.deleteById(jobExperienceId);
             return new SuccessResult("JobExperience deleted");
         }
         return new ErrorResult("JobExperience Id doesn't exist");
     }
-
     @Override
     public Result addJobExperienceToCv(int cvId, int jobExperienceId) {
         Cv cv = cvDao.getByCvId(cvId);
