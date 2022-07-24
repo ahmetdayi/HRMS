@@ -1,6 +1,5 @@
 package hrms.hrms.entities.concretes;
 
-import hrms.hrms.core.entities.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,6 +20,7 @@ public class Role {
 
     @Column(nullable = false,unique = true,length = 50)
     private String name;
+
 
     public Role(String role) {
         this.name =role;
